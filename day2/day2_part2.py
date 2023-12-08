@@ -12,24 +12,24 @@ def load_file(fname: Path) -> list[str]:
         return [x.strip() for x in f.readlines()]
 
 
-def parse_colors(colors: str):
+def parse_colors(colors: str) -> dict[str, int]:
     color_dict = {x.split(" ")[1]: int(x.split(" ")[0]) for x in colors}
     return color_dict
 
 
-def parse_draw(draw: str):
+def parse_draw(draw: str) -> dict[str, int]:
     colors = draw.split(", ")
     # colors = [ for x in d]
     return parse_colors(colors)
 
 
-def parse_game(game: str):
+def parse_game(game: str) -> list[dict[str, int]]:
     games = game.split("; ")
     draws = [parse_draw(x) for x in games]
     return draws
 
 
-def parse_lines(lines: list[str]):
+def parse_lines(lines: list[str]) -> dict[int, list[dict[str, int]]]:
     lines = [x.split(": ") for x in lines]
     lines_dict = {int(x[0][5:]): parse_game(x[1]) for x in lines}
     return lines_dict
@@ -48,8 +48,8 @@ def get_maxes(lines: list[str]):
     return max_dict
 
 
-def check_min_viable(lines: list[str]):
-    out = []
+def check_min_viable(lines: list[str]) -> list[int]:
+    out: list[int] = []
     maxes = get_maxes(lines)
     for g_number, game_maxes in maxes.items():
         # print("maxes: ", game_maxes)
