@@ -1,7 +1,7 @@
 from pathlib import Path
 
 DAY = 2
-INPUT_FILE = Path(f"day{DAY}" / "input.txt")
+INPUT_FILE = Path(f"day{DAY}/input.txt")
 
 
 def load_file(fname: Path) -> list[str]:
